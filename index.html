@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Cumpleaños Profe Kevin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #ff6b6b, #4ecdc4);
+      font-family: 'Poppins', sans-serif;
+      overscroll-behavior: none;
+    }
+    .card {
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .card-inner {
+      transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transform-style: preserve-3d;
+      position: relative;
+      width: 100%;
+      height: 100px;
+    }
+    .card.flipped .card-inner {
+      transform: rotateX(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .card-front {
+      background: linear-gradient(135deg, #ffeb3b, #ffd700);
+      color: #333;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .card-back {
+      background: linear-gradient(135deg, #2196f3, #1976d2);
+      color: white;
+      transform: rotateX(180deg);
+      font-size: 0.9rem;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: linear-gradient(145deg, #ffffff, #f0f4f8);
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 90%;
+      width: 450px;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      animation: slideIn 0.5s ease;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 60px;
+      height: 90px;
+      background: radial-gradient(circle at 50% 30%, #ffeb3b, #ff6b6b);
+      border-radius: 50%;
+      animation: float 5s infinite ease-in-out;
+      z-index: 0;
+    }
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #333;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-700px); }
+    }
+    .confetti {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #ffeb3b;
+      animation: fall 4s linear infinite;
+      z-index: 0;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100vh) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(720deg); }
+    }
+    .header-image {
+      animation: bounce 2s infinite ease-in-out;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .card-inner {
+        height: 80px;
+      }
+      .card-front, .card-back {
+        font-size: 0.9rem;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      .header-image {
+        width: 48px;
+        height: 48px;
+      }
+      .modal-content {
+        padding: 15px;
+        width: 95%;
+      }
+    }
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .card-inner {
+        height: 90px;
+      }
+    }
+    @media (min-width: 1025px) {
+      .grid {
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center pt-8 pb-12">
+  <!-- Sección de cabecera con imágenes y texto -->
+  <header class="text-center mb-12">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-lg">¡Feliz Cumpleaños, Profe Kevin!</h1>
+    <p class="text-base md:text-lg lg:text-xl text-white mt-4 max-w-3xl mx-auto">
+      Hoy celebramos los 38 años de nuestro increíble profesor de Software, Kevin Antonio Valenzuela Rafailan. ¡Haz clic en las casillas para descubrir mensajes especiales!
+    </p>
+    <div class="flex justify-center gap-6 mt Elf-6">
+      <img src="https://img.icons8.com/color/96/000000/birthday-cake.png" alt="Pastel" class="header-image w-12 h-12 md:w-16 md:h-16 lg:w-24 lg:h-24">
+      <img src="https://img.icons8.com/color/96/000000/party-hat.png" alt="Sombrero de fiesta" class="header-image w-12 h-12 md:w-16 md:h-16 lg:w-24 lg:h-24">
+    </div>
+  </header>
+
+  <!-- Cuadrícula de casillas -->
+  <div class="grid gap-3 max-w-7xl w-full px-4">
+    <!-- Generar 32 casillas dinámicamente -->
+  </div>
+
+  <!-- Modal para mensajes -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h2 id="modal-title" class="text-2xl md:text-3xl font-bold text-pink-600"></h2>
+      <p id="modal-message" class="text-base md:text-lg text-gray-700 mt-3"></p>
+      <button id="close-modal" class="mt-6 px-6 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition duration-300">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Globos y confeti -->
+  <div class="balloon" style="left: 5%; animation-delay: 0s;"></div>
+  <div class="balloon" style="left: 15%; animation-delay: 1.5s;"></div>
+  <div class="balloon" style="left: 85%; animation-delay: 0.5s;"></div>
+  <div class="balloon" style="left: 95%; animation-delay: 2s;"></div>
+  <div class="confetti" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="confetti" style="left: 20%; animation-delay: 0.8s; background: #4ecdc4;"></div>
+  <div class="confetti" style="left: 30%; animation-delay: 1.6s; background: #ff6b6b;"></div>
+  <div class="confetti" style="left: 40%; animation-delay: 2.4s;"></div>
+  <div class="confetti" style="left: 50%; animation-delay: 0.4s; background: #2196f3;"></div>
+  <div class="confetti" style="left: 60%; animation-delay: 1.2s;"></div>
+  <div class="confetti" style="left: 70%; animation-delay: 2s; background: #ffeb3b;"></div>
+  <div class="confetti" style="left: 80%; animation-delay: 0.6s; background: #4ecdc4;"></div>
+
+  <script>
+    const names = [
+      "Vanessa", "Jorge", "Misael", "Luciana", "Madeline", "Ariel", "Natalia", "Juan",
+      "Edgar", "Guillermo", "Javier", "Kevin", "Emanuel", "Iverson", "Fernanda", "Joel",
+      "René", "Neftaly", "Nayeli", "Jared", "Isabel", "Nathaly", "Mariana", "Adolfo",
+      "Moya", "Nefi", "Sahara", "Anderson", "Daniela", "Minerva", "Angie", "Rebeca"
+    ];
+
+    const messages = [
+      "¡Vanessa, Hoy es un día especial por que celebramos tu vida y la fortuna de tenerlo cerca; le deseo que cada instante de esté nuevo año este lleno de alegría, amor y sueños cumplidos!",
+      "¡Jorge, Gracias profe por enseñarnos con tanta paciencia, por estar con nosotros día con día haciendo más y más divertida la clase, gracias por esas risas, Feliz Cumpleaños al ingeniero más bondadoso!",
+      "¡Misael, 🎉 ¡Feliz cumpleaños, Profe Kevin! 🎉 Hoy no se compila solo un año más, ¡se lanza una nueva versión mejorada de ti En tu IDE favorito, Eclipse, la consola celebra tu existencia con cero errores y mil razones para sonreír. Gracias por ser ese maestro que no solo enseña sintaxis, sino también lógica, pasión y paciencia. Has sido como un buen framework: confiable, claro y siempre dispuesto a ayudar cuando algo no funciona. Tu enseñanza es como una clase abstracta: deja una huella que todos debemos implementar. Tus palabras motivan más que cualquier IntelliSense, y tus lecciones se quedan en la memoria como variables globales. Que este nuevo año de vida venga con proyectos exitosos, ideas brillantes y ningún bug emocional. Que cada día sea como un programa bien ejecutado: lleno de propósito, sin excepciones, y con muchos logs de felicidad. ¡Gracias por todo lo que haces y por ser un verdadero líder en el código y en la vida!",
+      "¡Luciana, En tu cumpleaños quiero recordarte lo importante que eres para quienes te rodeamos y desearte que la felicidad, la salud y el éxito te acompañen siempre.!",
+      "¡Madeline, Que este nuevo año de vida te regale momentos inolvidables, personas sinceras a tu lado y oportunidades que te acerquen cada vez más a tus sueños.!",
+      "¡Ariel, Espero que este día esté lleno de sorpresas agradables, abrazos sinceros y recuerdos hermosos que te acompañen durante todo el año.!",
+      "¡Natalia, Felicidades  ingeniero kevin valenzuela que nos ayuda en lo de modulo profe y  que nos aconseja tambien  feliz dia que la pase super bien con su familia y amigos Happy Birthday!🥳",
+      "¡Juan, Hoy celebramos no solo el día en que naciste, sino también el privilegio de compartir contigo tantos momentos especiales; que la vida te sonría siempre.!",
+      "¡Edgar, En este cumpleaños quiero agradecerte por tu amistad, tu cariño y por ser esa persona tan especial que ilumina la vida de quienes te conocemos.!",
+      "¡Guillermo, Querido profesor, en este día tan especial quiero felicitarlo por su cumpleaños número 38 y agradecerle sinceramente por todo lo que nos ha enseñado, no solo en el aula, sino también con su ejemplo y dedicación. Usted es una inspiración para todos nosotros, por su pasión al enseñar, su paciencia y su compromiso con nuestro aprendizaje. Le deseo un año lleno de alegrías, salud, éxitos y momentos inolvidables junto a sus seres queridos. ¡Feliz cumpleaños! Que siga cumpliendo muchos años más, guiando y motivando a nuevas generaciones con esa vocación tan admirable que lo caracteriza.!❤❤❤",
+      "¡Javier, Espero que este cumpleaños marque el inicio de una etapa llena de logros, aprendizajes y momentos que te hagan sentir pleno y realizado.!",
+      "¡Kevin, Que nunca te falte la fuerza para seguir adelante, la ilusión para soñar y la alegría para disfrutar cada momento de tu vida.!",
+      "¡Emanuel, ¡Feliz cumpleaños! Que este año esté lleno de nuevas aventuras, experiencias maravillosas y todo el amor que das multiplicado para ti.!",
+      "¡Iverson, Hoy quiero desearte un cumpleaños tan increíble como tú, lleno de alegría, rodeado de las personas que más te quieren y de momentos inolvidables.!",
+      "¡Fernanda, Feliz cumpleaños al dueño del audio BAILALO ROCKY🔥 gracias por sus consejos y siempre entendernos lo amamos mucho ❤ me encantó me encantó!",
+      "¡Joel, En este día tan especial, deseo que recibas mucho amor, bendiciones infinitas y todo lo que tu corazón anhela.!",
+      "¡René, ¡Feliz cumpleaños profeeeee! Que cada línea de su código en su vida compile alegrías, sus proyectos personales se ejecuten sin errores, ¡Que tengas un año lleno de logros, innovación y café bien cargado! ☕💻",
+      "¡Neftaly, Profe Kevin, en su día especial, le deseo todo lo mejor. ¡Feliz cumpleaños! Que este nuevo año le regale salud, paz y muchas satisfacciones.",
+      "¡Nayeli, ¡Feliz cumple, profe Kevin! Que su día especial sea tan mágico como sus clases. ¡Le deseo todo lo mejor hoy y siempre!",
+      "¡Jared, Felicidades profe, lo quiero mucho... subame la nota ❤️!",
+      "¡Isabel, Feliz cumpleaños a nuestro ingeniero favorito, que cumpla muchos años más de vida y tenga un lindo y feliz día 💫",
+      "¡Nathaly, Feliz cumpleaños profe Kevin, gracias por sus consejos, por tenernos paciencia y por la sabiduría que nos transfiere.",
+      "¡Mariana, ¡Muchas felicidades, profe Kevin! ¡Que este día sea épico para usted y que lo disfrute al máximo!",
+      "¡Adolfo, ¡Feliz cumpleaños, profe Kevin! Que este nuevo año le traiga solo cosas buenas. ¡Felicidades por ser tan especial y por dejar huella en cada uno de nosotros!",
+      "¡Moya, De todo corazón le deseo un muy feliz cumpleaños ingeniero, que se la pase muy feliz en este día tan especial, que Dios le bendiga y le regale muchos años más y mucha paciencia para aguantar mis bromas, se le quiere mucho",
+      "🎉 ¡Feliz Cumpleaños, Ingeniero Kevin! 🎉 Hoy es un día muy especial porque celebramos el nacimiento de una persona que no solo transmite conocimientos, sino también valores, motivación y un gran ejemplo de profesionalismo. 👨‍🏫🛠️ Gracias por cada clase impartida con pasión, por tener siempre la paciencia de explicarnos una y otra vez hasta que todo quede claro, y por enseñarnos que la ingeniería no es solo números y fórmulas, sino una forma de cambiar el mundo con lógica, creatividad y perseverancia. 📐📊💡 Usted no es solo un gran profesor, sino también una inspiración para todos los que aspiramos a ser mejores cada día. Su manera de enseñar nos ha demostrado que los errores son parte del aprendizaje y que con esfuerzo, todo es posible. 🚀📚 Espero que este nuevo año de vida esté lleno de éxitos profesionales, momentos inolvidables, mucha salud, alegría y que cada uno de sus sueños se vaya haciendo realidad. ¡Se lo merece más que nadie! 🥳🎂✨ Gracias por ser un guía en nuestro camino académico y por compartir con nosotros no solo su conocimiento, sino también su humanidad. ¡Feliz cumpleaños, profe Kevin! 🎁🎈🥂 Con aprecio y admiración",
+      "¡Sahara, ¡Feliz cumpleaños, profe Kevin! Que este día sea épico, lleno de alegría, buenos momentos y rodeado de personas que lo aprecian. ¡Felicidades por ser tan especial! Le deseo un nuevo año lleno de éxitos, salud y bendiciones. ¡A disfrutar cada segundo de este día como se merece!",
+      "¡Anderson, que este nuevo año de vida te regale solo amor sincero, alegría sin límites y muchas bendiciones! ¡Feliz cumpleaños!",
+      "¡Daniela, Felicidades ingeniero que siga cumpliendo muchos años más y que su vida esté llena de bendiciones, que tenga éxitos siempre y ¡no quiebre vajillas!",
+      "¡Minerva, ¡Feliz cumpleaños! Que tu día esté lleno de magia, risas sinceras y recuerdos hermosos. ¡Te lo mereces!",
+      "¡Angie, ¡Feliz cumpleaños Ingeniero Kevin! Espero que siga cumpliendo muchos años mas y que el conocimiento suyo nunca decaiga a lo largo de los años para así transmitirlo a todas las generaciones que vienen y se van, usted deja una huella en cualquiera por sus consejos y su enseñanza. Felicidades por otro año mas de vida",
+      "¡Felicidades, Rebeca! Que la celebración siga con toda la alegría y que este nuevo año esté lleno de momentos increíbles."
+    ];
+
+    const grid = document.querySelector('.grid');
+    names.forEach((name, index) => {
+      const card = document.createElement('div');
+      card.className = 'card w-full h-24';
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-front">${name}</div>
+          <div class="card-back">¡Felicidades!</div>
+        </div>
+      `;
+      card.addEventListener('click', () => {
+        card.classList.toggle('flipped');
+        setTimeout(() => showModal(name, messages[index]), 800);
+      });
+      grid.appendChild(card);
+    });
+
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalMessage = document.getElementById('modal-message');
+    const closeModal = document.getElementById('close-modal');
+
+    function showModal(name, message) {
+      modalTitle.textContent = `¡Feliz Cumpleaños!`;
+      modalMessage.textContent = message;
+      modal.style.display = 'flex';
+    }
+
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
